@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robot Arm Control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Geist:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+
+    <!-- Glass Header -->
+    <header class="glass-header" data-testid="app-header">
+      <div class="header-inner">
+        <div class="header-left">
+          <svg class="logo-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+          <h1>Robot Arm</h1>
+        </div>
+        <div class="header-right">
+          <span class="status-badge" data-testid="status-badge">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusLabel">Getrennt</span>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+
+      <!-- Connection Panel -->
+      <section class="card connection-card" data-testid="connection-panel">
+        <h2 class="card-title">Verbindung</h2>
+        <div class="connection-row">
+          <select id="portSelect" class="select" data-testid="port-select">
+            <option value="">-- Port wahlen --</option>
+          </select>
+          <input type="number" id="baudRate" class="input input-narrow" value="115200" placeholder="Baud" data-testid="baud-input">
+          <button id="refreshPorts" class="btn btn-secondary btn-sm" data-testid="refresh-ports">Aktualisieren</button>
+          <button id="connectBtn" class="btn btn-primary" data-testid="connect-btn">Verbinden</button>
+          <button id="disconnectBtn" class="btn btn-secondary" data-testid="disconnect-btn" disabled>Trennen</button>
+        </div>
+      </section>
+
+      <!-- Control Grid -->
+      <div class="control-grid">
+
+        <!-- Einzelservo -->
+        <section class="card" data-testid="control-single">
+          <h2 class="card-title">Einzelservo</h2>
+          <div class="param-grid">
+            <div class="param-group">
+              <label class="param-label">Basis</label>
+              <div class="param-row">
+                <input type="number" id="basisVal" class="input" value="90" min="0" max="180">
+                <button class="btn btn-secondary btn-icon cmd-btn" data-cmd="basis" data-testid="cmd-basis">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="param-group">
+              <label class="param-label">Gelenk 1</label>
+              <div class="param-row">
+                <input type="number" id="gelenk1Val" class="input" value="90" min="0" max="180">
+                <button class="btn btn-secondary btn-icon cmd-btn" data-cmd="gelenk1" data-testid="cmd-gelenk1">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="param-group">
+              <label class="param-label">Gelenk 2</label>
+              <div class="param-row">
+                <input type="number" id="gelenk2Val" class="input" value="0" min="0" max="180">
+                <button class="btn btn-secondary btn-icon cmd-btn" data-cmd="gelenk2" data-testid="cmd-gelenk2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="param-group">
+              <label class="param-label">Alle</label>
+              <div class="param-row">
+                <input type="number" id="allVal" class="input" value="90" min="0" max="180">
+                <button class="btn btn-secondary btn-icon cmd-btn" data-cmd="all" data-testid="cmd-all">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Schnellaktionen -->
+        <section class="card" data-testid="control-quick">
+          <h2 class="card-title">Aktionen</h2>
+
+          <div class="action-group">
+            <h3 class="group-label">Greifer</h3>
+            <div class="btn-strip">
+              <button class="btn btn-primary cmd-btn flex-1" data-cmd="auf" data-testid="cmd-auf">AUF (45°)</button>
+              <button class="btn btn-primary cmd-btn flex-1" data-cmd="zu" data-testid="cmd-zu">ZU (140°)</button>
+            </div>
+          </div>
+
+          <div class="action-group">
+            <h3 class="group-label">Positionen</h3>
+            <div class="btn-strip">
+              <button class="btn btn-primary cmd-btn flex-1" data-cmd="start" data-testid="cmd-start">Start</button>
+              <button class="btn btn-secondary cmd-btn flex-1" data-cmd="posi" data-testid="cmd-posi">Position</button>
+              <button class="btn btn-secondary cmd-btn flex-1" data-cmd="undo" data-testid="cmd-undo">90°</button>
+            </div>
+          </div>
+
+          <div class="action-group">
+            <h3 class="group-label">System</h3>
+            <div class="btn-strip">
+              <button class="btn btn-secondary cmd-btn flex-1" data-cmd="test" data-testid="cmd-test">Testlauf</button>
+              <button class="btn btn-secondary cmd-btn flex-1" data-cmd="help" data-testid="cmd-help">Hilfe</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Serial Output -->
+      <section class="card output-card" data-testid="output-panel">
+        <div class="output-header">
+          <h2 class="card-title">Serielle Ausgabe</h2>
+          <button id="clearOutput" class="btn btn-secondary btn-sm" data-testid="clear-output">Leeren</button>
+        </div>
+        <pre id="serialOutput" class="serial-output" data-testid="serial-output"></pre>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
