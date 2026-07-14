@@ -1,0 +1,91 @@
+{
+  "theme": "dark",
+  "archetype": "Nothing OS - Retro-Futuristic / Minimalist Dot-Matrix",
+  "typography": {
+    "headings": {
+      "font_family": "NDot 57, Outfit, sans-serif",
+      "classes": "font-normal tracking-wide text-white uppercase",
+      "h1": "text-5xl sm:text-6xl lg:text-7xl font-ndot",
+      "h2": "text-3xl sm:text-4xl lg:text-5xl font-ndot",
+      "h3": "text-2xl sm:text-3xl font-ndot"
+    },
+    "body": {
+      "font_family": "Inter, Geist, sans-serif",
+      "classes": "text-base text-neutral-400 leading-relaxed font-light"
+    },
+    "mono": {
+      "font_family": "JetBrains Mono, monospace",
+      "classes": "text-sm text-neutral-500 tracking-tighter"
+    }
+  },
+  "colors": {
+    "background": "#000000",
+    "surface": "#121212",
+    "surface_hover": "#1C1C1C",
+    "primary": "#FFFFFF",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#888888",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "accent": "#D71921",
+    "status_success": "#4CAF50",
+    "status_warning": "#FFC107"
+  },
+  "layout": {
+    "spacing_scale": "p-1, p-2, p-4, p-8, p-16",
+    "grid_system": "Bento Grid System",
+    "app_layout": {
+      "sidebar": "bg-black border-r border-white/10 w-64 h-full",
+      "main_content": "bg-black flex-1 overflow-y-auto p-6"
+    }
+  },
+  "surfaces_and_borders": {
+    "cards": "bg-[#121212] border border-white/10 rounded-[24px] overflow-hidden shadow-none",
+    "glassmorphism": "backdrop-blur-md bg-black/40 border border-white/5",
+    "hover_states": "hover:bg-white/5 transition-all duration-300 ease-in-out",
+    "corner_radius": {
+      "large": "28px",
+      "medium": "16px",
+      "small": "8px"
+    }
+  },
+  "components": {
+    "navigation": "Minimalist top bar with NDot typography for titles. Icons should be monochrome with subtle red accents on active states.",
+    "buttons": "Primary: Rounded-full, bg-white, text-black, font-medium. Secondary: Rounded-full, border border-white/20, text-white. Icon-only: bg-neutral-900 rounded-full p-3.",
+    "widgets": "Bento-style cards with fixed aspect ratios (1x1, 2x1, 2x2). Use dot-matrix patterns for data visualization.",
+    "glyph_interface": "Use thin white lines (1-2px) with high brightness to simulate the Glyph lights. Can be used as progress bars or notification indicators.",
+    "list_items": "Clean rows with 16px padding. Use NDot for primary labels and Inter for subtext. Dividers should be 1px white/5."
+  },
+  "icons": {
+    "library": "Lucide (customized to be thinner) or Nothing Custom Icons",
+    "style": "2px stroke width, monochrome (White/Grey), no fills unless active.",
+    "special": "Dot-matrix style icons for weather, battery, and clock."
+  },
+  "media": {
+    "image_urls": [
+      {
+        "url": "https://cdn.sanity.io/images/gtd4w1cq/production/ed1d0fd68a33c71cf2347a5c2caf427c5901cc77-4096x2305.jpg",
+        "category": "product_shot",
+        "description": "Nothing Phone (2) official product render showing the Glyph interface and hardware design."
+      },
+      {
+        "url": "https://cdn.sanity.io/images/gtd4w1cq/production/04b62d522a73fb4e6c7128039d8c5fd926f6f7ba-4000x2250.webp",
+        "category": "ui_reference",
+        "description": "Nothing OS home screen with custom widgets and dot-matrix typography."
+      }
+    ]
+  },
+  "accessibility": {
+    "contrast": "High contrast (White on Pure Black). Red accent (#D71921) should be used sparingly for critical actions only.",
+    "focus_states": "Ring-2 ring-white/30 ring-offset-2 ring-offset-black"
+  },
+  "instructions_to_main_agent": [
+    "1. Use NDot 57 for all major headings and brand-related labels.",
+    "2. Stick to a 'Pitch Black' (#000000) background for true OLED depth.",
+    "3. Components must have a high corner radius (24px-28px) to match the hardware curvature.",
+    "4. Use a Bento Grid layout for dashboard and content organization.",
+    "5. Implement subtle 'dot' patterns in backgrounds or as data points in charts.",
+    "6. Keep the interface extremely clean; if an element isn't necessary, remove it.",
+    "7. Use the signature Nothing Red (#D71921) as a single-point accent color.",
+    "8. Animations should be snappy and mimic physical switches or mechanical movements."
+  ]
+}

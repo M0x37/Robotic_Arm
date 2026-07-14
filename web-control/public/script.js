@@ -1,6 +1,6 @@
 const socket = io();
 
-const statusDot = document.getElementById('statusDot');
+const statusLed = document.getElementById('statusLed');
 const statusLabel = document.getElementById('statusLabel');
 const portSelect = document.getElementById('portSelect');
 const baudRate = document.getElementById('baudRate');
@@ -12,15 +12,15 @@ const clearOutput = document.getElementById('clearOutput');
 
 function setConnected(connected) {
   if (connected) {
-    statusDot.classList.add('connected');
-    statusLabel.textContent = 'Verbunden';
+    statusLed.classList.add('on');
+    statusLabel.textContent = 'ON';
     connectBtn.disabled = true;
     disconnectBtn.disabled = false;
     portSelect.disabled = true;
     baudRate.disabled = true;
   } else {
-    statusDot.classList.remove('connected');
-    statusLabel.textContent = 'Getrennt';
+    statusLed.classList.remove('on');
+    statusLabel.textContent = 'OFF';
     connectBtn.disabled = false;
     disconnectBtn.disabled = true;
     portSelect.disabled = false;
@@ -38,7 +38,7 @@ socket.on('status', (data) => {
 });
 
 socket.on('ports', (ports) => {
-  portSelect.innerHTML = '<option value="">-- Port wahlen --</option>';
+  portSelect.innerHTML = '<option value="">-- Port --</option>';
   ports.forEach(p => {
     const opt = document.createElement('option');
     opt.value = p.path;
@@ -46,12 +46,16 @@ socket.on('ports', (ports) => {
     portSelect.appendChild(opt);
   });
   if (ports.length === 0) {
-    portSelect.innerHTML = '<option value="">-- Keine Ports gefunden --</option>';
+    portSelect.innerHTML = '<option value="">-- No ports --</option>';
   }
 });
 
+socket.on('serialData', (line) => {
+  appendSerial(line);
+});
+
 socket.on('error', (msg) => {
-  appendSerial('[FEHLER] ' + msg);
+  appendSerial('[ERR] ' + msg);
 });
 
 refreshPorts.addEventListener('click', () => {
@@ -60,7 +64,7 @@ refreshPorts.addEventListener('click', () => {
 
 connectBtn.addEventListener('click', () => {
   const path = portSelect.value;
-  if (!path) { appendSerial('[FEHLER] Bitte Port wahlen'); return; }
+  if (!path) { appendSerial('[ERR] Select port'); return; }
   socket.emit('serialConnect', { path, baudRate: baudRate.value });
 });
 
@@ -92,10 +96,6 @@ document.querySelectorAll('.cmd-btn').forEach(btn => {
 
     socket.emit('send', { cmd: fullCmd });
   });
-});
-
-socket.on('serialData', (line) => {
-  appendSerial(line);
 });
 
 socket.emit('listPorts');

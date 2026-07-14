@@ -1,26 +1,24 @@
-/* ========================================
-   Design Tokens (Archetype 4 – Linear/Vercel)
-   ======================================== */
+/* ===========================================
+   Nothing OS – Retro-Futuristic Dot-Matrix Theme
+   =========================================== */
 :root {
-  --bg-app: #0A0A0A;
-  --bg-surface: #121212;
-  --bg-surface-hover: #1A1A1A;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.12);
-  --text-primary: #F5F5F5;
-  --text-secondary: #A3A3A3;
-  --text-muted: #525252;
-  --accent: #FFFFFF;
+  --bg: #000000;
+  --surface: #121212;
+  --surface-hover: #1C1C1C;
+  --text: #FFFFFF;
+  --text-dim: #888888;
+  --border: rgba(255, 255, 255, 0.1);
+  --red: #D71921;
+  --green: #4CAF50;
   --font-display: 'Outfit', sans-serif;
   --font-body: 'Geist', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --radius: 8px;
-  --radius-lg: 12px;
+  --r-large: 28px;
+  --r-medium: 16px;
+  --r-small: 8px;
+  --r-full: 9999px;
 }
 
-/* ========================================
-   Reset & Base
-   ======================================== */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -33,355 +31,427 @@ html, body {
 
 body {
   font-family: var(--font-body);
-  background: var(--bg-app);
-  color: var(--text-primary);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========================================
-   App Layout
-   ======================================== */
-.app-layout {
+/* ===========================================
+   App
+   =========================================== */
+.app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
-.main-content {
+.main {
   flex: 1;
-  max-width: 800px;
+  max-width: 720px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 24px 48px;
+  padding: 20px 20px 48px;
+  position: relative;
+  z-index: 1;
 }
 
-/* ========================================
-   Glass Header
-   ======================================== */
-.glass-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(10, 10, 10, 0.6);
+/* ===========================================
+   Top Bar
+   =========================================== */
+.topbar {
   border-bottom: 1px solid var(--border);
+  background: var(--bg);
 }
 
-.header-inner {
+.topbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 800px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 12px 24px;
+  padding: 14px 20px;
 }
 
-.header-left {
+.topbar-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
-.logo-icon {
-  color: var(--accent);
-  opacity: 0.7;
+.logo-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  display: block;
 }
 
-.header-left h1 {
+.logo-text {
   font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text);
 }
 
-.header-right {
+.topbar-right {
   display: flex;
   align-items: center;
 }
 
-/* ========================================
-   Status Badge
-   ======================================== */
-.status-badge {
+/* ===========================================
+   Status Pill
+   =========================================== */
+.status-pill {
   display: flex;
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ff4444;
-  transition: background 0.3s ease;
-}
-
-.status-dot.connected {
-  background: #22c55e;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
-}
-
-/* ========================================
-   Card
-   ======================================== */
-.card {
-  background: var(--bg-surface);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--r-full);
+}
+
+.status-led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #555;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.status-led.on {
+  background: var(--green);
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+/* ===========================================
+   Bento Card
+   =========================================== */
+.bento-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-medium);
   padding: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   transition: border-color 0.2s;
 }
 
-.card:hover {
-  border-color: var(--border-hover);
+.bento-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.bento-wide {
+  grid-column: 1 / -1;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--r-small);
+  color: var(--text-dim);
+  flex-shrink: 0;
 }
 
 .card-title {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 14px;
+  color: var(--text-dim);
+  flex: 1;
 }
 
-/* ========================================
-   Connection Row
-   ======================================== */
-.connection-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
+/* ===========================================
+   Bento Grid
+   =========================================== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
-/* ========================================
+@media (max-width: 600px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===========================================
    Form Elements
-   ======================================== */
+   =========================================== */
 .select, .input {
   font-family: var(--font-body);
   font-size: 13px;
-  background: var(--bg-app);
-  color: var(--text-primary);
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--text);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--r-small);
   padding: 8px 12px;
   outline: none;
   transition: border-color 0.2s;
 }
 
 .select:focus, .input:focus {
-  border-color: var(--accent);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .select {
   flex: 1;
-  min-width: 140px;
+  min-width: 120px;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23A3A3A3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
   padding-right: 32px;
 }
 
 .input-narrow {
-  width: 80px;
+  width: 72px;
 }
 
 .input[type="number"] {
   width: 100%;
+  -moz-appearance: textfield;
 }
 
-/* ========================================
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ===========================================
+   Connection Row
+   =========================================== */
+.connection-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ===========================================
    Buttons
-   ======================================== */
+   =========================================== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   padding: 8px 16px;
   border: none;
-  border-radius: var(--radius);
+  border-radius: var(--r-full);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   white-space: nowrap;
   user-select: none;
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .btn:disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: not-allowed;
   transform: none;
 }
 
 .btn-sm {
-  font-size: 12px;
-  padding: 6px 12px;
-}
-
-.btn-icon {
-  padding: 8px 10px;
-  flex-shrink: 0;
+  font-size: 11px;
+  padding: 5px 12px;
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: #0A0A0A;
+  background: var(--text);
+  color: var(--bg);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #e5e5e5;
+  background: #e0e0e0;
 }
 
 .btn-secondary {
   background: transparent;
   border: 1px solid var(--border);
-  color: var(--text-primary);
+  color: var(--text);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-dim);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-accent {
+  background: var(--red);
+  color: var(--text);
+}
+
+.btn-accent:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn-pill {
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border: none;
+}
+
+.btn-pill:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.btn-pill.btn-accent {
+  background: var(--red);
+}
+
+.btn-pill.btn-accent:hover:not(:disabled) {
+  background: #b0141a;
 }
 
 .flex-1 {
   flex: 1;
 }
 
-/* ========================================
-   Control Grid
-   ======================================== */
-.control-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 0;
-}
-
-@media (max-width: 640px) {
-  .control-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ========================================
+/* ===========================================
    Param Group
-   ======================================== */
-.param-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
+   =========================================== */
 .param-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .param-label {
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .param-row {
   display: flex;
   gap: 6px;
+  margin-bottom: 8px;
 }
 
 .param-row .input {
   flex: 1;
 }
 
-/* ========================================
-   Action Groups
-   ======================================== */
-.action-group {
+/* ===========================================
+   Action Blocks
+   =========================================== */
+.action-block {
   margin-bottom: 14px;
 }
 
-.action-group:last-child {
+.action-block:last-child {
   margin-bottom: 0;
 }
 
-.group-label {
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+.block-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-dim);
   text-transform: uppercase;
-  color: var(--text-muted);
+  letter-spacing: 0.08em;
   margin-bottom: 8px;
 }
 
-.btn-strip {
+.pill-strip {
   display: flex;
   gap: 6px;
 }
 
-/* ========================================
-   Serial Output
-   ======================================== */
-.output-card {
-  margin-top: 16px;
-}
-
-.output-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0;
-}
-
-.output-header .card-title {
-  margin-bottom: 0;
-}
-
-.serial-output {
-  font-family: var(--font-mono);
+.pill-strip .btn-pill {
+  padding: 10px 14px;
   font-size: 12px;
-  line-height: 1.7;
-  color: #a3e3a3;
-  background: var(--bg-app);
+}
+
+/* ===========================================
+   Console
+   =========================================== */
+.console {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.8;
+  color: #a0a0a0;
+  background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--r-small);
   padding: 14px;
-  height: 220px;
+  height: 200px;
   overflow-y: auto;
   white-space: pre-wrap;
   word-break: break-all;
-  margin-top: 12px;
   tab-size: 2;
 }
 
-.serial-output::-webkit-scrollbar {
-  width: 6px;
+.console::-webkit-scrollbar {
+  width: 4px;
 }
 
-.serial-output::-webkit-scrollbar-track {
+.console::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.serial-output::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
+.console::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+
+/* ===========================================
+   Dot Matrix Background
+   =========================================== */
+.dot-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
