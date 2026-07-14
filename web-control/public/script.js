@@ -50,8 +50,40 @@ socket.on('ports', (ports) => {
   }
 });
 
+const armPos = { base: 0, shoulder: 160, elbow: 0, gripper: 45 };
+
+function sync3D() {
+  if (window.updateArm3D) {
+    window.updateArm3D(armPos.base, armPos.shoulder, armPos.elbow, armPos.gripper);
+  }
+}
+
 socket.on('serialData', (line) => {
   appendSerial(line);
+
+  let m;
+
+  m = line.match(/^Base:\s*(\d+).*Joint1:\s*(\d+).*Joint2:\s*(\d+).*Gripper:\s*(\d+)/);
+  if (m) { armPos.base = +m[1]; armPos.shoulder = +m[2]; armPos.elbow = +m[3]; armPos.gripper = +m[4]; sync3D(); return; }
+
+  m = line.match(/^Base at (\d+)/);
+  if (m) { armPos.base = +m[1]; sync3D(); return; }
+
+  m = line.match(/^Joint1 at (\d+)/);
+  if (m) { armPos.shoulder = +m[1]; sync3D(); return; }
+
+  m = line.match(/^Joint2 at (\d+)/);
+  if (m) { armPos.elbow = +m[1]; sync3D(); return; }
+
+  if (line.includes('Gripper OPEN'))  { armPos.gripper = 45; sync3D(); return; }
+  if (line.includes('Gripper CLOSED')) { armPos.gripper = 140; sync3D(); return; }
+
+  if (line.includes('All servos at start')) {
+    armPos.base = 0; armPos.shoulder = 160; armPos.elbow = 0; armPos.gripper = 45; sync3D(); return;
+  }
+
+  m = line.match(/^All servos at (\d+)/);
+  if (m) { const v = +m[1]; armPos.base = v; armPos.shoulder = v; armPos.elbow = v; armPos.gripper = v; sync3D(); return; }
 });
 
 socket.on('error', (msg) => {
@@ -69,7 +101,7 @@ connectBtn.addEventListener('click', () => {
 });
 
 disconnectBtn.addEventListener('click', () => {
-  socket.emit('disconnect');
+  socket.emit('killConnection');
 });
 
 clearOutput.addEventListener('click', () => {

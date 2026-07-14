@@ -154,6 +154,24 @@ body {
   grid-column: 1 / -1;
 }
 
+.bento-3d {
+  padding: 12px;
+}
+
+.scene3d-container {
+  width: 100%;
+  height: 320px;
+  display: block;
+  border-radius: var(--r-small);
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .scene3d-container {
+    height: 240px;
+  }
+}
+
 .card-header {
   display: flex;
   align-items: center;
