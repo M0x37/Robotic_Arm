@@ -3,7 +3,7 @@
     "Robot Arm Initializing...",
     "System ready!",
     "All servos at 90\u00b0",
-    "Commands: base|joint1(90-190)|joint2 VALUE | all VALUE | open | close | start | posi | undo | test",
+    "Commands: base(basis)|joint1(gelenk1)(90-190)|joint2(gelenk2) VALUE | all VALUE | open(auf)| close(zu) | start | posi | undo | test",
     "Base: {val} | Joint1: {val} | Joint2: {val} | Gripper: {val}",
     "All servos at start position",
     "All servos at {val}\u00b0",

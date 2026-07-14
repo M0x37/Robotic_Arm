@@ -70,12 +70,21 @@ void loop() {
   s.trim();
   s.toLowerCase();
 
+  String n = s;
+  if (n.startsWith("basis"))   n = "base"   + n.substring(5);
+  if (n.startsWith("gelenk1")) n = "joint1" + n.substring(7);
+  if (n.startsWith("gelenk2")) n = "joint2" + n.substring(7);
+  if (n == "auf")   n = "open";
+  if (n == "zu")    n = "close";
+
+  s = n;
+
   if (s == "undo") {
     moveAll(90, 5);
     Serial.println(F("All servos at 90\u00b0"));
 
   } else if (s == "help") {
-    Serial.println(F("Commands: base|joint1(90-190)|joint2 VALUE | all VALUE | open | close | start | posi | undo | test"));
+    Serial.println(F("Commands: base(basis)|joint1(gelenk1)(90-190)|joint2(gelenk2) VALUE | all VALUE | open(auf)| close(zu) | start | posi | undo | test"));
 
   } else if (s == "posi") {
     Serial.print(F("Base: ")); Serial.print(posBase);
@@ -152,7 +161,7 @@ void loop() {
   } else {
     Serial.print(F("Unknown command: "));
     Serial.println(s);
-    Serial.println("Commands: base|joint1(90-190)|joint2 VALUE | all VALUE | open | close | start | posi | undo | test");
+    Serial.println(F("Commands: base(basis)|joint1(gelenk1)(90-190)|joint2(gelenk2) VALUE | all VALUE | open(auf)| close(zu) | start | posi | undo | test"));
   }
 
   delay(50);
