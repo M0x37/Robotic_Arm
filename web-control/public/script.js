@@ -83,9 +83,9 @@ document.querySelectorAll('.cmd-btn').forEach(btn => {
 
     let fullCmd = cmd;
     const valMap = {
-      basis: 'basisVal',
-      gelenk1: 'gelenk1Val',
-      gelenk2: 'gelenk2Val',
+      base: 'baseVal',
+      joint1: 'joint1Val',
+      joint2: 'joint2Val',
       all: 'allVal'
     };
 

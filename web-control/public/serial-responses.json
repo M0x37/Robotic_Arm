@@ -1,19 +1,19 @@
 {
   "responses": [
-    "Robot Arm Initialisierung...",
-    "System bereit!",
-    "Alle Servos auf 90\u00b0",
-    "Befehle: basis|gelenk1(90-190)|gelenk2 WERT | all WERT | auf | zu | start | posi | undo | test",
-    "Basis: {wert} | Gelenk1: {wert} | Gelenk2: {wert} | Greifer: {wert}",
-    "Alle Servos auf Startposition",
-    "Alle Servos auf {wert} Grad",
-    "Basis auf {wert} Grad",
-    "Gelenk1 auf {wert} Grad",
-    "Gelenk2 auf {wert} Grad",
-    "Greifer AUF (45\u00b0)",
-    "Greifer ZU (140\u00b0)",
-    "Test: Alle Servos nacheinander 0->180->90",
-    "=== Test fertig ===",
-    "Unbekannter Befehl: {cmd}"
+    "Robot Arm Initializing...",
+    "System ready!",
+    "All servos at 90\u00b0",
+    "Commands: base|joint1(90-190)|joint2 VALUE | all VALUE | open | close | start | posi | undo | test",
+    "Base: {val} | Joint1: {val} | Joint2: {val} | Gripper: {val}",
+    "All servos at start position",
+    "All servos at {val}\u00b0",
+    "Base at {val}\u00b0",
+    "Joint1 at {val}\u00b0",
+    "Joint2 at {val}\u00b0",
+    "Gripper OPEN (45\u00b0)",
+    "Gripper CLOSED (140\u00b0)",
+    "Test: each servo 0->180->home",
+    "=== Test done ===",
+    "Unknown command: {cmd}"
   ]
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,6 @@
 <body>
   <div class="app">
 
-    <!-- Top Bar -->
     <header class="topbar">
       <div class="topbar-inner">
         <div class="topbar-left">
@@ -30,7 +29,6 @@
 
     <main class="main">
 
-      <!-- Connection -->
       <section class="bento-card connection-card">
         <div class="card-header">
           <span class="card-icon">
@@ -49,7 +47,6 @@
         </div>
       </section>
 
-      <!-- Bento Grid -->
       <div class="bento-grid">
 
         <section class="bento-card">
@@ -61,31 +58,31 @@
           </div>
 
           <div class="param-group">
-            <label class="param-label">Basis</label>
+            <label class="param-label">Base</label>
             <div class="param-row">
-              <input type="number" id="basisVal" class="input" value="90" min="0" max="180">
-              <button class="btn btn-pill cmd-btn" data-cmd="basis" data-testid="cmd-basis">
+              <input type="number" id="baseVal" class="input" value="90" min="0" max="180">
+              <button class="btn btn-pill cmd-btn" data-cmd="base" data-testid="cmd-base">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </button>
             </div>
 
-            <label class="param-label">Gelenk 1</label>
+            <label class="param-label">Joint 1</label>
             <div class="param-row">
-              <input type="number" id="gelenk1Val" class="input" value="160" min="90" max="190">
-              <button class="btn btn-pill cmd-btn" data-cmd="gelenk1" data-testid="cmd-gelenk1">
+              <input type="number" id="joint1Val" class="input" value="160" min="90" max="190">
+              <button class="btn btn-pill cmd-btn" data-cmd="joint1" data-testid="cmd-joint1">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </button>
             </div>
 
-            <label class="param-label">Gelenk 2</label>
+            <label class="param-label">Joint 2</label>
             <div class="param-row">
-              <input type="number" id="gelenk2Val" class="input" value="0" min="0" max="180">
-              <button class="btn btn-pill cmd-btn" data-cmd="gelenk2" data-testid="cmd-gelenk2">
+              <input type="number" id="joint2Val" class="input" value="0" min="0" max="180">
+              <button class="btn btn-pill cmd-btn" data-cmd="joint2" data-testid="cmd-joint2">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </button>
             </div>
 
-            <label class="param-label">Alle</label>
+            <label class="param-label">All</label>
             <div class="param-row">
               <input type="number" id="allVal" class="input" value="90" min="0" max="180">
               <button class="btn btn-pill cmd-btn" data-cmd="all" data-testid="cmd-all">
@@ -104,10 +101,10 @@
           </div>
 
           <div class="action-block">
-            <h3 class="block-label">Greifer</h3>
+            <h3 class="block-label">Gripper</h3>
             <div class="pill-strip">
-              <button class="btn btn-pill cmd-btn flex-1" data-cmd="auf" data-testid="cmd-auf">AUF</button>
-              <button class="btn btn-pill cmd-btn flex-1" data-cmd="zu" data-testid="cmd-zu">ZU</button>
+              <button class="btn btn-pill cmd-btn flex-1" data-cmd="open" data-testid="cmd-open">Open</button>
+              <button class="btn btn-pill cmd-btn flex-1" data-cmd="close" data-testid="cmd-close">Close</button>
             </div>
           </div>
 
@@ -129,7 +126,6 @@
           </div>
         </section>
 
-        <!-- Serial Monitor - Bento 2x1 -->
         <section class="bento-card bento-wide">
           <div class="card-header">
             <span class="card-icon">
@@ -143,7 +139,6 @@
 
       </div>
 
-      <!-- Dot matrix decoration -->
       <div class="dot-grid" aria-hidden="true"></div>
 
     </main>
