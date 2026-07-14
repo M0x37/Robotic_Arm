@@ -87,6 +87,12 @@ body {
   background: var(--red);
   border-radius: 50%;
   display: block;
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(215,25,33,0.3); }
+  50%      { box-shadow: 0 0 16px rgba(215,25,33,0.6); }
 }
 
 .logo-text {
@@ -96,6 +102,16 @@ body {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--text);
+  background: linear-gradient(90deg, #fff 0%, #aaa 50%, #fff 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 3s ease-in-out infinite;
+}
+
+@keyframes textShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .topbar-right {
@@ -157,6 +173,9 @@ body {
 .bento-card {
   position: relative;
   overflow: hidden;
+  transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.1s ease;
+  will-change: transform;
 }
 
 .card-header {

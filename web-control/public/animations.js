@@ -194,3 +194,48 @@ function burstParticles() {
   }
   anim();
 }
+
+// ── Card Parallax Tilt ──
+document.querySelectorAll('.bento-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rx = ((y - cy) / cy) * -6;
+    const ry = ((x - cx) / cx) * 6;
+    card.style.setProperty('--rx', rx + 'deg');
+    card.style.setProperty('--ry', ry + 'deg');
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.setProperty('--rx', '0deg');
+    card.style.setProperty('--ry', '0deg');
+  });
+});
+
+// ── Connection Uptime ──
+const statusLabel = document.getElementById('statusLabel');
+let uptimeInterval = null;
+let uptimeSeconds = 0;
+
+function updateUptime() {
+  uptimeSeconds++;
+  const m = Math.floor(uptimeSeconds / 60);
+  const s = uptimeSeconds % 60;
+  statusLabel.textContent = `ON ${m}:${s.toString().padStart(2, '0')}`;
+}
+
+const obs2 = new MutationObserver(() => {
+  const on = statusLed.classList.contains('on');
+  if (on && !uptimeInterval) {
+    uptimeSeconds = 0;
+    uptimeInterval = setInterval(updateUptime, 1000);
+    updateUptime();
+  } else if (!on && uptimeInterval) {
+    clearInterval(uptimeInterval);
+    uptimeInterval = null;
+    statusLabel.textContent = 'OFF';
+  }
+});
+obs2.observe(statusLed, { attributes: true, attributeFilter: ['class'] });
