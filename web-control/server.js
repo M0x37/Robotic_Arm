@@ -54,7 +54,7 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('disconnect', () => {
+  socket.on('killConnection', () => {
     if (port && port.isOpen) {
       port.close();
     }
