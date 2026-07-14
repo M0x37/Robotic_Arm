@@ -27,8 +27,9 @@ int angleToTicks(int angle) {
 }
 
 void moveServo(int port, int &currentPos, int targetPos, int speed) {
-  if (targetPos > 180) targetPos = 180;
+  if (targetPos > 190) targetPos = 190;
   if (targetPos < 0)   targetPos = 0;
+  if (port == PORT_SCHULTER && targetPos < 90) targetPos = 90;
   if (currentPos == targetPos) return;
 
   while (currentPos != targetPos) {
@@ -74,7 +75,7 @@ void loop() {
     Serial.println(F("Alle Servos auf 90°"));
 
   } else if (s == "help") {
-    Serial.println(F("Befehle: basis|gelenk1|gelenk2 WERT | all WERT | auf | zu | start | posi | undo | test"));
+    Serial.println(F("Befehle: basis|gelenk1(90-190)|gelenk2 WERT | all WERT | auf | zu | start | posi | undo | test"));
 
   } else if (s == "posi") {
     Serial.print(F("Basis: ")); Serial.print(posBasis);
@@ -151,7 +152,7 @@ void loop() {
   } else {
     Serial.print(F("Unbekannter Befehl: "));
     Serial.println(s);
-    Serial.println("Befehle: basis|gelenk1|gelenk2 WERT | all WERT | auf | zu | start | posi | undo | test");
+    Serial.println("Befehle: basis|gelenk1(90-190)|gelenk2 WERT | all WERT | auf | zu | start | posi | undo | test");
   }
 
   delay(50);
